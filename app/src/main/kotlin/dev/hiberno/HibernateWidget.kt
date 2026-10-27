@@ -10,7 +10,9 @@ import android.widget.RemoteViews
 open class HibernateWidget : AppWidgetProvider() {
     override fun onUpdate(c: Context, mgr: AppWidgetManager, ids: IntArray) = mgr.updateAppWidget(ids, views(c))
 
-    open fun views(c: Context) = RemoteViews(c.packageName, R.layout.widget).apply {
+    open fun views(c: Context) = tappable(c, R.layout.widget)
+
+    protected fun tappable(c: Context, layout: Int) = RemoteViews(c.packageName, layout).apply {
         setOnClickPendingIntent(R.id.widget_root, HibernateReceiver.pending(c, announce = true))
     }
 
@@ -26,10 +28,9 @@ open class HibernateWidget : AppWidgetProvider() {
 }
 
 class HibernateWidgetWide : HibernateWidget() {
-    override fun views(c: Context) = RemoteViews(c.packageName, R.layout.widget_wide).apply {
+    override fun views(c: Context) = tappable(c, R.layout.widget_wide).apply {
         val p = Prefs(c)
-        setTextViewText(R.id.widget_count, "${(p.lastStopped intersect p.apps).size} asleep")
+        setTextViewText(R.id.widget_count, "${p.asleep.size} asleep")
         setTextViewText(R.id.widget_sub, "Tap to hibernate ${p.apps.size}")
-        setOnClickPendingIntent(R.id.widget_root, HibernateReceiver.pending(c, announce = true))
     }
 }

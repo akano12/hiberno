@@ -116,17 +116,14 @@ class MainActivity : Activity(), SharedPreferences.OnSharedPreferenceChangeListe
         val added = picked.toSet()
         picked.clear()
         adding = false
-        // Forget any stale result from before they were last removed, so they don't show as asleep yet.
-        prefs.lastStopped -= added
-        prefs.lastSkipped -= added
+        prefs.forget(added) // stale result from before they were last removed
         prefs.apps += added
         render()
         HibernateService.hibernateNow(this, announce = true, only = added)
     }
 
     private fun remove(pkg: String) {
-        prefs.lastStopped -= pkg
-        prefs.lastSkipped -= pkg
+        prefs.forget(setOf(pkg))
         prefs.apps -= pkg
     }
 
@@ -175,7 +172,7 @@ class MainActivity : Activity(), SharedPreferences.OnSharedPreferenceChangeListe
 
     private fun render() {
         val listed = prefs.apps
-        val asleep = (prefs.lastStopped intersect listed).size
+        val asleep = prefs.asleep.size
         val kept = (prefs.lastSkipped intersect listed).size
         text(R.id.hero_count).text = asleep.toString()
         text(R.id.hero_label).text = if (asleep == 1) "app asleep" else "apps asleep"
@@ -184,10 +181,12 @@ class MainActivity : Activity(), SharedPreferences.OnSharedPreferenceChangeListe
 
         val root = Shell.isAppGrantedRoot()
         tile(R.id.dot_root, R.id.val_root, root == true, when (root) { null -> "Checking"; true -> "Granted"; false -> "Missing" })
-        tile(R.id.dot_cutoff, R.id.val_cutoff, App.xposed != null, if (App.xposed != null) "Active" else "Off")
+        tile(R.id.dot_cutoff, R.id.val_cutoff, App.xposed != null, App.cutoffLabel)
         tile(R.id.dot_doze, R.id.val_doze, prefs.doze, if (prefs.doze) "Aggressive" else "Normal")
 
-        tab(R.id.tab_sleeping, !adding, "Sleeping · ${listed.size}")
+        // Uninstalled apps stay listed (they come back if reinstalled) but aren't shown, so don't count them.
+        val sleeping = if (apps.isEmpty()) listed.size else apps.count { it.pkg in listed }
+        tab(R.id.tab_sleeping, !adding, "Sleeping · $sleeping")
         tab(R.id.tab_add, adding, null)
         chip(R.id.chip_user, filter == Filter.USER)
         chip(R.id.chip_system, filter == Filter.SYSTEM)
@@ -211,7 +210,7 @@ class MainActivity : Activity(), SharedPreferences.OnSharedPreferenceChangeListe
         show(R.id.hero, !adding)
         show(R.id.add_controls, adding)
         show(R.id.done, adding)
-        show(R.id.sleep_dock, !adding)
+        show(R.id.hibernate, !adding)
         show(R.id.list, !empty)
         show(R.id.empty, empty)
     }

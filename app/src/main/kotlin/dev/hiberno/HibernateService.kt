@@ -84,19 +84,23 @@ class HibernateService : Service() {
             if (script.isEmpty()) return onDone()
             Shell.cmd(script).submit { r ->
                 val (stopped, skipped) = parseResult(r.out)
-                if (only == null) {
-                    p.lastStopped = stopped
-                    p.lastSkipped = skipped
-                    p.lastRun = System.currentTimeMillis()
-                } else { // a partial run only updates its own apps and doesn't start a new round
-                    p.lastStopped = p.lastStopped - targets + stopped
-                    p.lastSkipped = p.lastSkipped - targets + skipped
+                // No output and a failed exit: root was denied. Keep the previous result rather than recording "0 asleep".
+                val failed = !r.isSuccess && stopped.isEmpty() && skipped.isEmpty()
+                if (!failed) {
+                    if (only == null) {
+                        p.lastStopped = stopped
+                        p.lastSkipped = skipped
+                        p.lastRun = System.currentTimeMillis()
+                    } else { // a partial run only updates its own apps and doesn't start a new round
+                        p.lastStopped = p.lastStopped - targets + stopped
+                        p.lastSkipped = p.lastSkipped - targets + skipped
+                    }
+                    App.publishHibernated(p.lastStopped, newRound = only == null)
+                    HibernateWidget.refreshAll(c)
                 }
-                App.publishHibernated(p.lastStopped, newRound = only == null)
-                HibernateWidget.refreshAll(c)
                 if (announce && p.confirm) {
-                    val msg = if (r.isSuccess || stopped.isNotEmpty()) "Hibernated ${stopped.size} apps · ${skipped.size} kept awake"
-                    else "Hibernation failed: root not granted"
+                    val msg = if (failed) "Hibernation failed: root not granted"
+                    else "Hibernated ${stopped.size} apps · ${skipped.size} kept awake"
                     Toast.makeText(c, msg, Toast.LENGTH_SHORT).show()
                 }
                 onDone()

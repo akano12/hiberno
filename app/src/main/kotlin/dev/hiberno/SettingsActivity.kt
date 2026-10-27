@@ -58,7 +58,7 @@ class SettingsActivity : Activity() {
         group { switchRow("Aggressive Doze", "Enter deep sleep right after the screen turns off instead of waiting", prefs::doze) }
         section("Wake-up cut-off · LSPosed")
         group {
-            valueRow("Status", "Blocks other apps from waking sleeping ones", { if (App.xposed != null) "Active" else "Off" }, null)
+            valueRow("Status", "Blocks other apps from waking sleeping ones", { App.cutoffLabel }, null)
             switchRow("Count blocked wake-ups", "Show how often each app was stopped from waking", prefs::countWakeups)
         }
         section("Notifications")
@@ -176,7 +176,7 @@ class SettingsActivity : Activity() {
                 if (on) setBackgroundResource(R.drawable.bg_tab_on)
                 setOnClickListener {
                     prefs.theme = mode
-                    getSystemService(UiModeManager::class.java).setApplicationNightMode(mode) // recreates the activity
+                    getSystemService(UiModeManager::class.java).setApplicationNightMode(mode) // recreates only if the effective mode changes
                     recreate()
                 }
             }, LinearLayout.LayoutParams(0, px(44), 1f))

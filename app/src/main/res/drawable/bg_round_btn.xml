@@ -1,8 +1,0 @@
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item>
-        <shape android:shape="oval"><solid android:color="?attr/hAccentSoft" /></shape>
-    </item>
-    <item android:inset="6dp">
-        <shape android:shape="oval"><solid android:color="?attr/hAccent" /></shape>
-    </item>
-</layer-list>

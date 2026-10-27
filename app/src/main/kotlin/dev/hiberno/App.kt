@@ -21,6 +21,8 @@ class App : Application() {
         // Bound by LSPosed when the module is enabled; null otherwise (root-only mode).
         @Volatile var xposed: XposedService? = null
 
+        val cutoffLabel get() = if (xposed != null) "Active" else "Off"
+
         /**
          * Tells the system_server hook which apps are hibernated. A new round gets a new stamp, which resets
          * "opened by user"; a partial run keeps it so apps the user opened stay awake.

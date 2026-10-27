@@ -201,59 +201,49 @@
         </LinearLayout>
     </LinearLayout>
 
-    <ListView
-        android:id="@+id/list"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:clipToPadding="false"
-        android:divider="@android:color/transparent"
-        android:dividerHeight="6dp"
-        android:paddingHorizontal="16dp"
-        android:paddingVertical="8dp" />
+        android:layout_weight="1">
 
-    <TextView
-        android:id="@+id/empty"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:padding="32dp"
-        android:text="@string/empty_sleeping"
-        android:textColor="@color/muted"
-        android:textSize="15sp"
-        android:visibility="gone" />
+        <!-- Bottom padding keeps the last row clear of the floating button. -->
+        <ListView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="6dp"
+            android:paddingHorizontal="16dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="88dp" />
 
-    <LinearLayout
-        android:id="@+id/sleep_dock"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        android:paddingTop="6dp"
-        android:paddingBottom="10dp">
+        <TextView
+            android:id="@+id/empty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:padding="32dp"
+            android:text="@string/empty_sleeping"
+            android:textColor="@color/muted"
+            android:textSize="15sp"
+            android:visibility="gone" />
 
         <ImageButton
             android:id="@+id/hibernate"
-            android:layout_width="68dp"
-            android:layout_height="68dp"
-            android:background="@drawable/bg_round_btn"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="16dp"
+            android:background="@drawable/bg_fab"
             android:contentDescription="@string/hibernate_now"
-            android:padding="21dp"
+            android:elevation="6dp"
+            android:padding="16dp"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_zz"
-            android:tint="?attr/hOnAccent" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:importantForAccessibility="no"
-            android:text="@string/hibernate_now"
-            android:textColor="@color/text"
-            android:textSize="12sp"
-            android:textStyle="bold" />
-    </LinearLayout>
+            android:tint="?attr/hOnAccent"
+            android:tooltipText="@string/hibernate_now" />
+    </FrameLayout>
 
     <Button
         android:id="@+id/done"
