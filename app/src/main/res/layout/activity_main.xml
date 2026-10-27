@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:paddingStart="20dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="8dp">
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:importantForAccessibility="no"
+            android:src="@mipmap/ic_launcher" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:text="@string/app_name"
+            android:textColor="@color/text"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/settings"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/settings"
+            android:src="@drawable/ic_tune" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/hero"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="12dp"
+        android:animateLayoutChanges="true"
+        android:background="@drawable/bg_card"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:baselineAligned="true">
+
+            <TextView
+                android:id="@+id/hero_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text"
+                android:textSize="48sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/hero_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textColor="@color/text"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/hero_sub"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textColor="@color/muted"
+            android:textSize="14sp" />
+
+        <LinearLayout
+            android:id="@+id/hero_tiles"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp">
+
+            <LinearLayout
+                android:id="@+id/tile_root"
+                style="@style/Tile"
+                android:layout_marginEnd="8dp">
+
+                <TextView
+                    android:id="@+id/dot_root"
+                    style="@style/TileLabel"
+                    android:text="@string/root" />
+
+                <TextView
+                    android:id="@+id/val_root"
+                    style="@style/TileValue" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/tile_cutoff"
+                style="@style/Tile"
+                android:layout_marginEnd="8dp">
+
+                <TextView
+                    android:id="@+id/dot_cutoff"
+                    style="@style/TileLabel"
+                    android:text="@string/cutoff" />
+
+                <TextView
+                    android:id="@+id/val_cutoff"
+                    style="@style/TileValue" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/tile_doze"
+                style="@style/Tile">
+
+                <TextView
+                    android:id="@+id/dot_doze"
+                    style="@style/TileLabel"
+                    android:text="@string/doze" />
+
+                <TextView
+                    android:id="@+id/val_doze"
+                    style="@style/TileValue" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="4dp"
+        android:background="@drawable/bg_tabs"
+        android:padding="4dp">
+
+        <TextView
+            android:id="@+id/tab_sleeping"
+            style="@style/Tab" />
+
+        <TextView
+            android:id="@+id/tab_add"
+            style="@style/Tab"
+            android:layout_marginStart="4dp"
+            android:text="@string/add_apps" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/add_controls"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <EditText
+            android:id="@+id/search"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="8dp"
+            android:autofillHints=""
+            android:background="@drawable/bg_search"
+            android:drawableStart="@drawable/ic_search"
+            android:drawablePadding="10dp"
+            android:hint="@string/search_apps"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:paddingHorizontal="16dp"
+            android:textColor="@color/text"
+            android:textColorHint="@color/muted"
+            android:textSize="15sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="16dp"
+            android:paddingTop="10dp">
+
+            <TextView
+                android:id="@+id/chip_user"
+                style="@style/Chip"
+                android:text="@string/user_apps" />
+
+            <TextView
+                android:id="@+id/chip_system"
+                style="@style/Chip"
+                android:text="@string/system_apps" />
+
+            <TextView
+                android:id="@+id/chip_selected"
+                style="@style/Chip"
+                android:text="@string/selected" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:clipToPadding="false"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="6dp"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="8dp" />
+
+    <TextView
+        android:id="@+id/empty"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:padding="32dp"
+        android:text="@string/empty_sleeping"
+        android:textColor="@color/muted"
+        android:textSize="15sp"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/sleep_dock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingTop="6dp"
+        android:paddingBottom="10dp">
+
+        <ImageButton
+            android:id="@+id/hibernate"
+            android:layout_width="68dp"
+            android:layout_height="68dp"
+            android:background="@drawable/bg_round_btn"
+            android:contentDescription="@string/hibernate_now"
+            android:padding="21dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_zz"
+            android:tint="?attr/hOnAccent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:importantForAccessibility="no"
+            android:text="@string/hibernate_now"
+            android:textColor="@color/text"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/done"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/bg_pill"
+        android:stateListAnimator="@null"
+        android:textAllCaps="false"
+        android:textColor="?attr/hOnAccent"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        android:visibility="gone" />
+</LinearLayout>

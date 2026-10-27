@@ -1,0 +1,10 @@
+<resources>
+    <!-- Colours a palette or the pure black background can override, see Colors.kt -->
+    <attr name="hAccent" format="color" />
+    <attr name="hOnAccent" format="color" />
+    <attr name="hAccentSoft" format="color" />
+    <attr name="hBg" format="color" />
+    <attr name="hCard" format="color" />
+    <attr name="hTile" format="color" />
+    <attr name="hLine" format="color" />
+</resources>

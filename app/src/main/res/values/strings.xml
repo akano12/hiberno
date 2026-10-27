@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Hiberno</string>
+    <string name="settings">Settings</string>
+    <string name="root">Root</string>
+    <string name="cutoff">Cut-off</string>
+    <string name="doze">Doze</string>
+    <string name="add_apps">Add apps</string>
+    <string name="search_apps">Search apps</string>
+    <string name="user_apps">User apps</string>
+    <string name="system_apps">System apps</string>
+    <string name="selected">Selected</string>
+    <string name="empty_sleeping">No apps yet. Open “Add apps” and pick the ones that drain your battery.</string>
+    <string name="remove">Remove from list</string>
+    <string name="hibernate">Hibernate</string>
+    <string name="hibernate_now">Hibernate now</string>
+    <string name="widget_description">One tap hibernates your selected apps</string>
+    <string name="widget_wide_description">Shows how many apps are asleep; tap to hibernate</string>
+    <string name="xposed_description">Wake-up cut-off: stops hibernated apps from being woken by broadcasts, services, providers and alarms until you open them.</string>
+</resources>

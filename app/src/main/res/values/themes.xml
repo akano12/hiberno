@@ -1,0 +1,21 @@
+<resources>
+    <style name="Theme.Hiberno" parent="@android:style/Theme.DeviceDefault.DayNight">
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">?attr/hBg</item>
+        <item name="android:statusBarColor">?attr/hBg</item>
+        <item name="android:navigationBarColor">?attr/hBg</item>
+        <item name="android:windowLightStatusBar">@bool/light_bars</item>
+        <item name="android:windowLightNavigationBar">@bool/light_bars</item>
+        <item name="android:colorAccent">?attr/hAccent</item>
+        <item name="android:textColorPrimary">@color/text</item>
+        <!-- default palette "Teal" (Hiberno's mint); light/dark values come from values(-night)/colors.xml -->
+        <item name="hAccent">@color/accent</item>
+        <item name="hOnAccent">@color/on_accent</item>
+        <item name="hAccentSoft">@color/accent_soft</item>
+        <item name="hBg">@color/bg</item>
+        <item name="hCard">@color/card</item>
+        <item name="hTile">@color/tile</item>
+        <item name="hLine">@color/line</item>
+    </style>
+</resources>

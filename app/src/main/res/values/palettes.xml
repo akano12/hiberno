@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Accent palettes, same as Doppel's; the default Teal is the app theme itself -->
+<resources>
+    <!-- Pure black only applies in the dark theme (values-night) -->
+    <style name="ThemeOverlay.Hiberno.Black" parent="" />
+
+    <style name="ThemeOverlay.Hiberno.Ocean" parent="">
+        <item name="hAccent">#006497</item>
+        <item name="hOnAccent">#FFFFFF</item>
+        <item name="hAccentSoft">#40006497</item>
+    </style>
+
+    <style name="ThemeOverlay.Hiberno.Berry" parent="">
+        <item name="hAccent">#943D54</item>
+        <item name="hOnAccent">#FFFFFF</item>
+        <item name="hAccentSoft">#40943D54</item>
+    </style>
+
+    <style name="ThemeOverlay.Hiberno.Sky" parent="">
+        <item name="hAccent">#186778</item>
+        <item name="hOnAccent">#FFFFFF</item>
+        <item name="hAccentSoft">#40186778</item>
+    </style>
+
+</resources>
