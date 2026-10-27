@@ -85,7 +85,7 @@ class SettingsActivity : Activity() {
         section("About")
         group {
             val version = packageManager.getPackageInfo(packageName, 0).versionName
-            valueRow("Hiberno $version", "Source code: github.com/akano12/hiberno", { "Open" }) {
+            valueRow("Hiberno $version", "Free software under GPL-3.0 · github.com/akano12/hiberno", { "Open" }) {
                 startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(REPO_URL)))
             }
             valueRow("Open-source libraries", "libsu and libxposed (Apache License 2.0)", { "" }, null)

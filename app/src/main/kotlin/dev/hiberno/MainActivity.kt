@@ -56,12 +56,6 @@ class MainActivity : Activity(), SharedPreferences.OnSharedPreferenceChangeListe
 
         list = findViewById(R.id.list)
         list.adapter = adapter
-        list.setOnItemClickListener { _, _, pos, _ ->
-            if (!adding) return@setOnItemClickListener
-            val pkg = adapter.getItem(pos).pkg
-            if (!picked.remove(pkg)) picked += pkg
-            render()
-        }
         list.setOnScrollListener(object : AbsListView.OnScrollListener {
             private var userScrolling = false
             override fun onScrollStateChanged(v: AbsListView, state: Int) { userScrolling = state != AbsListView.OnScrollListener.SCROLL_STATE_IDLE }
@@ -266,6 +260,11 @@ class MainActivity : Activity(), SharedPreferences.OnSharedPreferenceChangeListe
                 row.isSelected = on
                 status.set(a.pkg, R.color.muted, 0)
                 row.contentDescription = "${a.label}, ${if (on) "selected" else "not selected"}"
+                // The row handles its own tap: ListView's item click drops quick taps when it re-binds rows mid-tap.
+                row.setOnClickListener {
+                    if (!picked.remove(a.pkg)) picked += a.pkg
+                    render()
+                }
             } else {
                 row.setBackgroundResource(R.drawable.bg_row)
                 row.isSelected = false
@@ -278,6 +277,8 @@ class MainActivity : Activity(), SharedPreferences.OnSharedPreferenceChangeListe
                 remove.contentDescription = "Remove ${a.label} from list"
                 remove.setOnClickListener { remove(a.pkg) }
                 row.contentDescription = null
+                row.setOnClickListener(null)
+                row.isClickable = false // setOnClickListener(null) still leaves it clickable
             }
             remove.visibility = if (adding) View.GONE else View.VISIBLE
             return row
